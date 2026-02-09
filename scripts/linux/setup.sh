@@ -1,17 +1,28 @@
 #!/bin/bash
 # setup.sh - Automação de Ambiente Debian
-# Version: 1.0.0
+# Version: 1.1.0
 # By: CodeBy.Dev
 
 set -e
 
 echo "--- Iniciando Setup do Ambiente Dev (Debian/Linux) ---"
 
-# 1. Garantir pasta Dev
-DEV_PATH="$HOME/Dev"
+# 1. Configuração do Workspace
+DEFAULT_PATH="$HOME/Dev"
+echo ""
+echo -e "\e[90mSugestão de Workspace: $DEFAULT_PATH\e[0m"
+read -p "Caminho do seu Workspace [Pressione ENTER para o padrão]: " USER_PATH
+
+DEV_PATH=${USER_PATH:-$DEFAULT_PATH}
+
 if [ ! -d "$DEV_PATH" ]; then
-    echo "Criando pasta Dev..."
-    mkdir -p "$DEV_PATH"
+    read -p "O diretório '$DEV_PATH' não existe. Deseja criá-lo agora? (S/N): " CREATE
+    if [[ "$CREATE" =~ ^[Ss]$ ]]; then
+        echo -e "\e[32mCriando pasta $DEV_PATH...\e[0m"
+        mkdir -p "$DEV_PATH"
+    fi
+else
+    echo -e "\e[90mPasta $DEV_PATH já existe e será utilizada.\e[0m"
 fi
 
 # 2. Atualizar Sistema

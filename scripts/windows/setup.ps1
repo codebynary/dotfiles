@@ -1,15 +1,31 @@
 # setup.ps1 - Automação de Ambiente Windows
-# Version: 1.0.0
+# Version: 1.1.0
 # By: CodeBy.Dev
 # Execute como Administrador
 
 Write-Host "--- Iniciando Setup do Ambiente Deva (Windows) ---" -ForegroundColor Cyan
 
-# 1. Garantir pasta Dev
-$devPath = "C:\Users\$env:USERNAME\Dev"
+# 1. Configuração do Workspace
+$defaultPath = "C:\Users\$env:USERNAME\Dev"
+Write-Host "`nSugestão de Workspace: $defaultPath" -ForegroundColor Gray
+$userPath = Read-Host "Caminho do seu Workspace [Pressione ENTER para o padrão]"
+
+if ([string]::IsNullOrWhiteSpace($userPath)) {
+    $devPath = $defaultPath
+}
+else {
+    $devPath = $userPath
+}
+
 if (-not (Test-Path $devPath)) {
-    Write-Host "Criando pasta Dev..."
-    New-Item -ItemType Directory -Path $devPath
+    $create = Read-Host "O diretório '$devPath' não existe. Deseja criá-lo agora? (S/N)"
+    if ($create -match "[Ss]") {
+        Write-Host "Criando pasta $devPath..." -ForegroundColor Green
+        New-Item -ItemType Directory -Path $devPath | Out-Null
+    }
+}
+else {
+    Write-Host "Pasta $devPath já existe e será utilizada." -ForegroundColor Gray
 }
 
 # 2. Atualizar Winget (se necessário)
