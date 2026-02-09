@@ -21,7 +21,8 @@ $apps = @(
     @{ ID = "Docker.DockerDesktop"; Name = "Docker Desktop" },
     @{ ID = "Microsoft.WSL"; Name = "WSL" },
     @{ ID = "CoreyButler.nvm-windows"; Name = "nvm (Node Version Manager)" },
-    @{ ID = "Kirin70.pyenv-win"; Name = "pyenv-win" }
+    @{ ID = "Kirin70.pyenv-win"; Name = "pyenv-win" },
+    @{ ID = "Google.Antigravity"; Name = "Antigravity AI" }
 )
 
 foreach ($app in $apps) {
@@ -30,7 +31,8 @@ foreach ($app in $apps) {
     if ($null -eq $check -or $check.Count -eq 0) {
         Write-Host "Instalando $($app.Name)..." -ForegroundColor Green
         winget install --id $($app.ID) --silent --accept-package-agreements --accept-source-agreements
-    } else {
+    }
+    else {
         Write-Host "$($app.Name) já está instalado." -ForegroundColor Gray
     }
 }

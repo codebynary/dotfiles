@@ -52,5 +52,15 @@ if [ ! -d "$HOME/.pyenv" ]; then
     curl https://pyenv.run | bash
 fi
 
+# 8. Antigravity
+if ! command -v antigravity &> /dev/null; then
+    echo "Instalando Antigravity..."
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://antigravity.google/apt/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/antigravity.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/antigravity.gpg] https://antigravity.google/apt stable main" | sudo tee /etc/apt/sources.list.d/antigravity.list
+    sudo apt update
+    sudo apt install antigravity -y
+fi
+
 echo "--- Setup Concluído! ---"
 echo "Por favor, reinicie sua sessão ou execute 'source ~/.bashrc' para aplicar as mudanças."
