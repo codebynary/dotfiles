@@ -1,6 +1,10 @@
 # ⚡ CodeBy.Dev // Dotfiles
 
 <p align="center">
+  <img src="assets/banner.png" alt="Dotfiles Banner" width="100%">
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Release-v1.0.0-blue?style=for-the-badge&logo=github" alt="Version">
   <img src="https://img.shields.io/badge/System-Windows%20%7C%20Debian-eb3c27?style=for-the-badge&logo=linux" alt="OS">
   <img src="https://img.shields.io/badge/Status-Stable-success?style=for-the-badge" alt="Status">
