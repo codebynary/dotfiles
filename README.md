@@ -31,7 +31,7 @@ Esqueça o tempo perdido configurando cada detalhe manualmente. Este repositóri
 
 ## 🛠️ Instalação Rápida
 
-Escolha o seu ambiente e execute o comando abaixo no terminal:
+Escolha o seu ambiente e execute o comando abaixo para instalar toda a stack, incluindo **Docker, WSL, NVM, Pyenv e Antigravity** de forma automática:
 
 ### 🪟 No Windows (Win 10/11)
 > [!IMPORTANT]
