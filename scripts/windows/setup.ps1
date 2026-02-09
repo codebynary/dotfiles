@@ -1,4 +1,5 @@
 # setup.ps1 - Automação de Ambiente Windows
+# By: CodeBy.Dev
 # Execute como Administrador
 
 Write-Host "--- Iniciando Setup do Ambiente Deva (Windows) ---" -ForegroundColor Cyan

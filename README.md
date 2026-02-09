@@ -16,5 +16,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 ### Debian
 ```bash
-curl -fsSL https://raw.githubusercontent.com/cfabioalves/dotfiles/main/scripts/linux/setup.sh | bash
+curl -fsSL https://raw.githubusercontent.com/codebynary/dotfiles/main/scripts/linux/setup.sh | bash
 ```
+
+---
+Mantido por **CodeBy.Dev**
