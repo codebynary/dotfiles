@@ -14,7 +14,7 @@
 
 ## 💎 A Proposta
 
-Esqueça o tempo perdido configurando cada detalhe manualmente. Este repositório é a sua **"infraestrutura como código"** pessoal. Uma stack robusta, moderna e pronta para o combate, entregue em um único comando.
+Esqueça o tempo perdido configurando cada detalhe manualmente. Este repositório é a sua **"infraestrutura como código"** pessoal. Uma stack robusta e moderna que não apenas instala suas ferramentas, mas também gerencia múltiplas versões de **Node.js (NVM)** e **Python (Pyenv)**, garantindo que seu ambiente esteja sempre pronto para qualquer projeto, entregue em um único comando.
 
 ### 🎯 O que será instalado?
 
