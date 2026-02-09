@@ -57,6 +57,6 @@ curl -fsSL https://raw.githubusercontent.com/codebynary/dotfiles/main/scripts/li
 
 ---
 <div align="center">
-  <p>Mantido com rigor por</p>
+  <p>Mantido por</p>
   <h3>💠 CodeBy.Dev 💠</h3>
 </div>
