@@ -1,4 +1,5 @@
 # setup.ps1 - Automação de Ambiente Windows
+# Version: 1.0.0
 # By: CodeBy.Dev
 # Execute como Administrador
 

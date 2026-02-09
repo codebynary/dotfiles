@@ -1,5 +1,6 @@
 #!/bin/bash
 # setup.sh - Automação de Ambiente Debian
+# Version: 1.0.0
 # By: CodeBy.Dev
 
 set -e
