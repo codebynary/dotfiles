@@ -6,7 +6,7 @@
 Write-Host "--- Iniciando Setup do Ambiente Deva (Windows) ---" -ForegroundColor Cyan
 
 # 1. Configuração do Workspace
-$defaultPath = "C:\Users\$env:USERNAME\Dev"
+$defaultPath = "$env:USERPROFILE\Dev"
 Write-Host "`nSugestão de Workspace: $defaultPath" -ForegroundColor Gray
 $userPath = Read-Host "Caminho do seu Workspace [Pressione ENTER para o padrão]"
 
