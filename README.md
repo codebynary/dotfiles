@@ -20,12 +20,12 @@ Esqueça o tempo perdido configurando cada detalhe manualmente. Este repositóri
 
 | Componente | Ferramenta | Descrição |
 | :--- | :--- | :--- |
-| **Virtualização** | 🐳 **Docker** | Containerization de nível industrial. |
-| **Subsistema** | 🐧 **WSL 2** | Ubuntu (20/22) e Debian integrados. |
-| **JS Runtime** | 🟢 **NVM** | Gestão de múltiplas versões do Node.js. |
-| **Py Runtime** | 🐍 **Pyenv** | Gestão de ambientes isolados Python. |
-| **Git Tooling** | 🐙 **Git & GH** | Controle de versão e CLI do GitHub. |
-| **AI Powered** | ⚛️ **Antigravity** | Seu parceiro de codificação avançado. |
+| **Virtualização** | 🐳 **Docker** | Containerization de nível industrial para microserviços. |
+| **Subsistema** | 🐧 **WSL 2** | Ubuntu (20/22) e Debian para um ambiente Linux nativo. |
+| **JS Runtime** | 🟢 **NVM / nvm-win** | Gestão total de versões **Node.js** para flexibilidade total. |
+| **Py Runtime** | 🐍 **Pyenv / win** | Isolamento e gestão de ambientes **Python** sem conflitos. |
+| **Git Tooling** | 🐙 **Git & GH** | Sincronização impecável com GitHub via CLI oficial. |
+| **AI Powered** | ⚛️ **Antigravity** | IA Agentic Avançada integrada para aceleração de código. |
 
 ---
 
