@@ -5,55 +5,69 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Release-v1.1.0-blue?style=for-the-badge&logo=github" alt="Version">
+  <img src="https://img.shields.io/badge/Release-v2.1.0-blue?style=for-the-badge&logo=github" alt="Version">
   <img src="https://img.shields.io/badge/System-Windows%20%7C%20Debian-eb3c27?style=for-the-badge&logo=linux" alt="OS">
   <img src="https://img.shields.io/badge/Status-Stable-success?style=for-the-badge" alt="Status">
 </p>
 
 ---
 
-## 💎 A Proposta
+## 💎 A Proposta (v2.1)
 
-Esqueça o tempo perdido configurando cada detalhe manualmente. Este repositório é a sua **"infraestrutura como código"** pessoal. Uma stack robusta e moderna que não apenas instala suas ferramentas, mas também gerencia múltiplas versões de **Node.js (NVM)** e **Python (Pyenv)**, garantindo que seu ambiente esteja sempre pronto para qualquer projeto, entregue em um único comando.
+Este repositório é o seu "centro de comando" para configurar novos ambientes em minutos. Agora com suporte a **Perfís Privados**, **Menu Interativo** e **Auto-Correção de Dependências**.
 
-### 🎯 O que será instalado?
+### 🛠️ Ferramentas Incluídas
 
-| Componente | Ferramenta | Descrição |
-| :--- | :--- | :--- |
-| **Virtualização** | 🐳 **Docker** | Containerization de nível industrial para microserviços. |
-| **Subsistema** | 🐧 **WSL 2** | Ubuntu (20/22) e Debian para um ambiente Linux nativo. |
-| **JS Runtime** | 🟢 **NVM / nvm-win** | Gestão total de versões **Node.js** para flexibilidade total. |
-| **Py Runtime** | 🐍 **Pyenv / win** | Isolamento e gestão de ambientes **Python** sem conflitos. |
-| **Git Tooling** | 🐙 **Git & GH** | Sincronização impecável com GitHub via CLI oficial. |
-| **AI Powered** | ⚛️ **Antigravity** | IA Agentic Avançada integrada para aceleração de código. |
+| Categoria | Softwares |
+| :--- | :--- |
+| **Core** | Git, GitHub CLI |
+| **Virtualização** | Docker Desktop, WSL 2 |
+| **Linguagens** | Node.js (NVM), Python (Pyenv) |
+| **Editores** | **VS Code, Cursor AI** |
+| **Browsers** | **Brave Browser**, Google Chrome |
+| **Dev Tools** | **Postman, DBeaver** |
+| **Comunicação** | Discord, Slack |
 
 ---
 
-## 🛠️ Instalação Rápida
+## 🪟 Windows (setup.ps1)
 
-Escolha o seu ambiente e execute o comando abaixo para instalar toda a stack, incluindo **Docker, WSL, NVM, Pyenv e Antigravity** de forma automática:
+O script de Windows conta com inteligência de auto-recuperação personalizada.
 
-### 🪟 No Windows (Win 10/11)
-> [!IMPORTANT]
-> Execute o PowerShell como **Administrador**.
+### Peculiaridades:
+- **Auto-Fix Winget**: Detecta se o `winget` está no PATH e corrige na sessão atual.
+- **Bootstrap Automático**: Se o sistema não tiver o `winget`, o script se oferece para baixar e instalar o instalador oficial do GitHub.
+- **Perfis de Usuário**: Sincroniza `.gitconfig` e preferências baseadas no usuário logado em `profiles/`.
 
+### Como rodar:
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/codebynary/dotfiles/main/scripts/windows/setup.ps1'))
-```
-
-### 🐧 No Debian / Ubuntu
-> [!NOTE]
-> Suporta arquiteturas x86_64 e ARM.
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/codebynary/dotfiles/main/scripts/linux/setup.sh | bash
+Set-ExecutionPolicy Bypass -Scope Process -Force; . .\scripts\windows\setup.ps1
 ```
 
 ---
 
-## 📂 Organização
-- `scripts/windows/` - Automação via **Winget**.
-- `scripts/linux/` - Automação via **APT**.
+## 🐧 Linux / WSL (setup.sh)
+
+Focado em distribuições baseadas em Debian/Ubuntu.
+
+### Peculiaridades:
+- **Gestor APT Automático**: Configura repositórios oficiais para ferramentas como VS Code e Brave.
+- **Modularidade de Perfis**: Mesma estrutura de pastas do Windows para manter a consistência entre sistemas.
+- **Relatório de Instalação**: Gera um log detalhado de cada pacote instalado.
+
+### Como rodar:
+```bash
+chmod +x scripts/linux/setup.sh && ./scripts/linux/setup.sh
+```
+
+---
+
+## 📂 Profiles Privados
+
+Para manter sua privacidade ao compartilhar este repo:
+1. O diretório `profiles/` está protegido por `.gitignore`.
+2. O script detecta automaticamente o nome do usuário logado.
+3. As personalizações (como `.gitconfig`) são aplicadas após a instalação base.
 
 ---
 <div align="center">
