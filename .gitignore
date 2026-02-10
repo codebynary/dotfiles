@@ -5,6 +5,13 @@ Thumbs.db
 # Logs
 *.log
 
-# Personal/Sensitive
+# Personal/Sensitive (v2.1 Privacy Policy)
 .env
 secret_*
+profiles/
+.ssh/
+
+# Dependencies & Build
+node_modules/
+dist/
+vendor/
