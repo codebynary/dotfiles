@@ -62,12 +62,17 @@ chmod +x scripts/linux/setup.sh && ./scripts/linux/setup.sh
 
 ---
 
-## 📂 Profiles Privados
+## 📂 Perfis Personalizados (Profiles)
 
-Para manter sua privacidade ao compartilhar este repo:
-1. O diretório `profiles/` está protegido por `.gitignore`.
-2. O script detecta automaticamente o nome do usuário logado.
-3. As personalizações (como `.gitconfig`) são aplicadas após a instalação base.
+Esta é a parte que torna o script "inteligente" para você e para seus amigos.
+
+### Como funciona?
+O script não tenta adivinhar suas configurações. Em vez disso, ele olha para a pasta `profiles/` e procura uma pasta que tenha o **mesmo nome do seu usuário** no Windows ou Linux (ex: `profiles/codeby/`).
+
+### Por que isso é importante?
+1.  **Privacidade**: O arquivo `.gitignore` garante que o conteúdo da pasta `profiles/` **nunca seja enviado para o GitHub**. Suas chaves SSH, e-mails e tokens ficam apenas na sua máquina.
+2.  **Compartilhamento**: Você pode enviar este script para um amigo. Quando ele rodar, o script vai procurar a pasta com o nome *dele*. Se não encontrar, ele instala as ferramentas básicas sem mexer nas configurações pessoais dele.
+3.  **Organização**: Você centraliza suas preferências (como o `.gitconfig` que já deixei pronto para você) e as aplica em qualquer máquina nova apenas rodando o setup.
 
 ---
 <div align="center">
