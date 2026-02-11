@@ -76,6 +76,6 @@ O script não tenta adivinhar suas configurações. Em vez disso, ele olha para 
 
 ---
 <div align="center">
-  <p>Mantido por</p>
+  <p>Criado e Mantido por</p>
   <h3>💠 CodeBy.Dev 💠</h3>
 </div>
