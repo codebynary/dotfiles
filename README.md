@@ -46,7 +46,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; . .\scripts\windows\setup.ps1
 
 ---
 
-## 🐧 Linux / WSL (setup.sh)
+## 🐧 Linux (setup.sh)
 
 Focado em distribuições baseadas em Debian/Ubuntu.
 
@@ -77,5 +77,5 @@ O script não tenta adivinhar suas configurações. Em vez disso, ele olha para 
 ---
 <div align="center">
   <p>Criado e Mantido por</p>
-  <h3>💠 CodeBy.Dev 💠</h3>
+  <h3> CodeBy.Dev </h3>
 </div>
