@@ -41,18 +41,21 @@ apps=(
     "brave;Brave Browser;Browsers"
     "postman;Postman;Dev Tools"
     "dbeaver;DBeaver;Dev Tools"
+    "claude;Claude Desktop;AI"
 )
 
 show_menu() {
-    echo -e "${YELLOW}Selecione as ferramentas para instalar (Ex: 1 2 5 ou 'A'):${RESET}"
+    echo -e "${YELLOW}Selecione as ferramentas para instalar:${RESET}"
+    echo -e "  ${GRAY}Formatos: '1 2 5', '1-5', '1,2,5' ou misto (ex: '1-3 5')${RESET}"
+    echo -e "  ${GRAY}'A' para TUDO, 'Q' para Sair${RESET}\n"
+    
     count=1
     for item in "${apps[@]}"; do
         IFS=';' read -r id name cat <<< "$item"
         echo -e "  $count. [$cat] $name"
         ((count++))
     done
-    echo -e "\n  A. Instalar TUDO"
-    echo -e "  Q. Sair\n"
+    echo ""
 }
 
 show_header
@@ -61,18 +64,44 @@ show_menu
 read -p "Opcao: " selection
 
 targets=()
-if [[ "$selection" == "A" || "$selection" == "all" ]]; then
+if [[ "${selection^^}" == "A" || "${selection,,}" == "all" ]]; then
     targets=("${apps[@]}")
-elif [[ "$selection" == "Q" || "$selection" == "q" ]]; then
+elif [[ "${selection^^}" == "Q" ]]; then
     exit 0
 else
-    # Suporta selecao separada por espaco ou virgula
-    for idx in ${selection//,/ }; do
-        target_idx=$((idx-1))
-        if [[ $target_idx -ge 0 && $target_idx -lt ${#apps[@]} ]]; then
-            targets+=("${apps[$target_idx]}")
+    # Normaliza entrada: troca vírgulas por espaços
+    normalized="${selection//,/ }"
+    
+    # Processa cada parte (individual ou range)
+    for part in $normalized; do
+        if [[ $part =~ ^([0-9]+)-([0-9]+)$ ]]; then
+            start=${BASH_REMATCH[1]}
+            end=${BASH_REMATCH[2]}
+            
+            # Garante ordem correta do range
+            if [ $start -gt $end ]; then
+                tmp=$start; start=$end; end=$tmp
+            fi
+            
+            for ((i=start; i<=end; i++)); do
+                idx=$((i-1))
+                if [[ $idx -ge 0 && $idx -lt ${#apps[@]} ]]; then
+                    targets+=("${apps[$idx]}")
+                fi
+            done
+        elif [[ $part =~ ^[0-9]+$ ]]; then
+            idx=$((part-1))
+            if [[ $idx -ge 0 && $idx -lt ${#apps[@]} ]]; then
+                targets+=("${apps[$idx]}")
+            fi
         fi
     done
+fi
+
+# Remove duplicatas se houver sobreposição de ranges
+if [ ${#targets[@]} -gt 0 ]; then
+    IFS=$'\n' targets=($(sort -u <<<"${targets[*]}"))
+    unset IFS
 fi
 
 if [ ${#targets[@]} -eq 0 ]; then
@@ -121,6 +150,15 @@ for item in "${targets[@]}"; do
             sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
             echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
             sudo apt update && sudo apt install -y brave-browser && success=true
+            ;;
+        "claude")
+            echo "    -> Baixando Claude Desktop (deb)..."
+            curl -L -o /tmp/claude.deb "https://storage.googleapis.com/claude-desktop/claude-desktop-latest.deb" || true
+            if [ -f /tmp/claude.deb ]; then
+                sudo apt install -y /tmp/claude.deb && success=true
+            else
+                echo "    -> Link direto nao disponivel ou falhou. Por favor, instale via navegador."
+            fi
             ;;
         *)
             echo "Instalacao automatica indisponivel para $id via apt."

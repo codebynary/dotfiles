@@ -90,16 +90,19 @@ $apps = @(
     [PSCustomObject]@{ ID = "Postman.Postman"; Name = "Postman"; Category = "Dev Tools" },
     [PSCustomObject]@{ ID = "dbeaver.dbeaver"; Name = "DBeaver"; Category = "Dev Tools" },
     [PSCustomObject]@{ ID = "Discord.Discord"; Name = "Discord"; Category = "Comunicacao" },
+    [PSCustomObject]@{ ID = "Anthropic.Claude"; Name = "Claude Desktop"; Category = "AI" },
     [PSCustomObject]@{ ID = "Google.Antigravity"; Name = "Antigravity AI"; Category = "AI" }
 )
 
 function Show-Menu {
-    Write-Host "Selecione as ferramentas para instalar (Ex: 1,2,5 ou 'A'):" -ForegroundColor Yellow
+    Write-Host "Selecione as ferramentas para instalar:" -ForegroundColor Yellow
+    Write-Host "  Formatos aceitos: '1,2,3', '1 2 3', '1-5' ou misto (ex: '1, 2 5-8')" -ForegroundColor Gray
+    Write-Host "  'A' para TUDO, 'Q' para Sair`n" -ForegroundColor Gray
+    
     for ($i = 0; $i -lt $apps.Count; $i++) {
         Write-Host "  $($i + 1). [$($apps[$i].Category)] $($apps[$i].Name)"
     }
-    Write-Host "`n  A. Instalar TUDO"
-    Write-Host "  Q. Sair`n"
+    Write-Host ""
 }
 
 Show-Header
@@ -108,20 +111,44 @@ Show-Menu
 $selection = Read-Host "Opcao"
 $targets = @()
 
-if ($selection -eq 'A' -or $selection -eq 'all') {
+if ($selection.ToUpper() -eq 'A' -or $selection.ToLower() -eq 'all') {
     $targets = $apps
 }
-elseif ($selection -eq 'Q') {
+elseif ($selection.ToUpper() -eq 'Q') {
     exit
 }
 else {
-    $indices = $selection -split ','
-    foreach ($idx in $indices) {
-        if ([int]::TryParse($idx.Trim(), [ref]$num)) {
-            $num--
-            if ($num -ge 0 -and $num -lt $apps.Count) {
-                $targets += $apps[$num]
+    # Normaliza a entrada: troca vírgulas por espaços para simplificar o parse
+    $normalizedInput = $selection -replace ',', ' '
+    $parts = $normalizedInput -split '\s+' | Where-Object { $_ -ne "" }
+    
+    $selectedIndices = New-Object System.Collections.Generic.HashSet[int]
+
+    foreach ($part in $parts) {
+        if ($part -match '^\d+-\d+$') {
+            # Trata intervalos (ex: 1-5)
+            $range = $part -split '-'
+            $start = [int]$range[0]
+            $end = [int]$range[1]
+            
+            # Garante que a ordem do range nao quebre o loop
+            $actualStart = [Math]::Min($start, $end)
+            $actualEnd = [Math]::Max($start, $end)
+            
+            for ($i = $actualStart; $i -le $actualEnd; $i++) {
+                $selectedIndices.Add($i) | Out-Null
             }
+        }
+        elseif ([int]::TryParse($part, [ref]$num)) {
+            # Trata numeros individuais
+            $selectedIndices.Add($num) | Out-Null
+        }
+    }
+
+    foreach ($idx in $selectedIndices) {
+        $realIdx = $idx - 1
+        if ($realIdx -ge 0 -and $realIdx -lt $apps.Count) {
+            $targets += $apps[$realIdx]
         }
     }
 }
